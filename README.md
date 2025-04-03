@@ -122,6 +122,73 @@ The application uses Supabase for authentication. To set up authentication:
 3. Copy your project URL and anon key to the `.env` file
 4. Create a user through the sign-up form or directly in the Supabase dashboard
 
+## 📊 Database Setup
+
+To push the database schema to Supabase:
+
+1. Install Supabase CLI:
+   ```bash
+   npm install supabase --save-dev
+   ```
+
+2. Initialize Supabase (creates necessary configuration files):
+   ```bash
+   npx supabase init
+   ```
+
+3. Link your project:
+   ```bash
+   npx supabase link --project-ref your_project_id
+   ```
+   Replace `your_project_id` with the ID from your Supabase project settings.
+
+4. Push the database schema:
+   ```bash
+   npx supabase db push
+   ```
+
+### Troubleshooting Database Setup
+
+If you encounter issues:
+
+1. **Wrong Database Connection**
+   - Double-check your database password in `.env`
+   - Ensure your project is active in the Supabase dashboard
+   - Try resetting your database password in Supabase dashboard
+
+2. **Project Linking Issues**
+   - Verify your project ID is correct
+   - Make sure you're logged in to Supabase CLI (`npx supabase login`)
+   - Check if your project is active in the dashboard
+
+3. **Migration Errors**
+   - Clear local Supabase configuration:
+     ```bash
+     rm -rf .supabase
+     npx supabase init
+     ```
+   - Relink and push:
+     ```bash
+     npx supabase link --project-ref your_project_id
+     npx supabase db push
+     ```
+
+4. **Permission Issues**
+   - Verify your service role key has the correct permissions
+   - Check if your project's database is not paused
+   - Ensure RLS (Row Level Security) policies are properly configured
+
+### Database Schema
+
+The project includes several key tables:
+
+- `users`: User profiles and authentication data
+- `images`: Image metadata and storage references
+- `analysis_results`: Results from image analysis
+- `user_settings`: User preferences and configurations
+
+All tables include proper foreign key relationships and RLS policies for security.
+
 ## 🤝 Contributing
 
 1. Fork the repository
